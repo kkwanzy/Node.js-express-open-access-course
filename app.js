@@ -5,18 +5,21 @@ const morgan = require('morgan');
 const path = require('path');
 
 const app = express();
-const port = 5000;
+const PORT = process.env.PORT || 5001;
 
 app.use(morgan('combined'));
 app.use(express.static(path.join(__dirname,"/Public/")));
 
+app.set("views","./src/views");
+app.set("view engine","ejs");
+
 app.get("/",(req,res)=>{
 
-    res.send('Hello nong beam');
+    res.render('index',{username: 'moo Kwan so hot', customer: ["a","b","c"]});
 })
 
-app.listen(port,()=>{
-    debug("Moo beam live in the wolrd on port " + chalk.green(" : "+port));
+app.listen(PORT,()=>{
+    debug("Moo beam live in the world on port " + chalk.green(" : "+PORT));
 })
 
 
